@@ -1,5 +1,5 @@
 {
-  "name": "image_search_abstraction_layer",
+  "name": "file_metadata_microservice",
   "version": "0.0.0",
   "private": true,
   "dependencies": {
@@ -7,7 +7,6 @@
     "connect": "^3.5.0",
     "express": "*",
     "express-handlebars": "*",
-    "google": "^2.1.0",
     "mongodb": "^2.2.22",
     "ruby": "^0.6.1",
     "sass": "^0.5.0"
@@ -47,12 +46,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NinoMaj/Image_Search_Abstraction_Layer.git"
+    "url": "git+https://github.com/NinoMaj/File_Metadata_Microservice.git"
   },
   "author": "NinoMaj",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/NinoMaj/Image_Search_Abstraction_Layer.git/issues"
+    "url": "https://github.com/NinoMaj/File_Metadata_Microservice.git/issues"
   },
-  "homepage": "https://github.com/NinoMaj/Image_Search_Abstraction_Layer.git#readme"
+  "homepage": "https://github.com/NinoMaj/File_Metadata_Microservice.git#readme"
 }

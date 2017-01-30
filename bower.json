@@ -1,5 +1,5 @@
 {
-  "name": "url-shortner-microservice",
+  "name": "file_metadata_microservice",
   "version": "0.0.0",
   "dependencies": {
     "inuit.css": "~5.0.0",
