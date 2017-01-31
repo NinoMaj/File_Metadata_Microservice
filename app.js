@@ -6,8 +6,6 @@
 let express = require('express'),
     app = express(),
     port = 3000,
-    MongoClient = require('mongodb').MongoClient,
-    assert = require('assert'),
     compression = require('compression'),
     path = require('path'),
     multer = require('multer'),
@@ -18,13 +16,6 @@ let express = require('express'),
  */
 let exphbs = require('express-handlebars');
 let hbs;
-
-// mongodb://localhost:27017/URLshort
-MongoClient.connect('mongodb://NinoMaj:bosswarmLab1@ds135519.mlab.com:35519/img_search', function (err, db) {
-
-    assert.equal(null, err);
-    console.log("Successfully connected to MongoDB.");
-    let imagesCollection = db.collection('imagesCollection');
 
     // For gzip compression
     app.use(compression());
@@ -87,12 +78,8 @@ MongoClient.connect('mongodb://NinoMaj:bosswarmLab1@ds135519.mlab.com:35519/img_
 
     })
 
-
-
     /*
      * Start it up
      */
     app.listen(process.env.PORT || port);
     console.log('Express started on port ' + port);
-
-}); // closing MongoClient
