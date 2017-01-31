@@ -10,7 +10,8 @@ let express = require('express'),
     assert = require('assert'),
     compression = require('compression'),
     path = require('path'),
-    google = require('google');
+    multer = require('multer'),
+    upload = multer();
 
 /*
  * Use Handlebars for templating
@@ -68,68 +69,25 @@ MongoClient.connect('mongodb://NinoMaj:bosswarmLab1@ds135519.mlab.com:35519/img_
      * Routes
      */
     // Index Page
-    app.get('/', function (request, response, next) {
-        response.render('index');
+    app.get('/', function (req, res, next) {
+        res.render('index');
+
     });
 
-    app.get('/latest', function (request, response, next) {
-        imagesCollection.find({
+    app.use(multer({dest:'./uploads/'}).single('fileInput'));
 
-        }, { term: 1, date: 1, _id: 0 }).sort({ date: -1 }).limit(10).toArray(function (err, doc) {
-            response.send(doc);
+    app.post('/upload', upload.single(), function (req, res, next) {
+
+        // req.file is the `avatar` file 
+        // req.body will hold the text fields, if there were any 
+        console.log(req.file);
+        res.render('result', {
+            result: req.file.size
         });
-    });
 
-    // URL handler route
-    app.get('/*', function (request, response, next) {
-        let reqPath = request.path.slice(1),
-            searchTerm = reqPath.split("%20").join(" "),
-            offset = request.query.offset || 10;
-        var results = [];
-
-        function showResults() {
-            // if (shortURL._id) {
-            //     shortURL._id = undefined
-            //};
-            results = JSON.parse(JSON.stringify(results));
-            // response.render('result', {
-            //     results: results
-            // });
-            response.send(results);
-            if (searchTerm !== 'favicon.ico') {
-                imagesCollection.insertOne({
-                    term: searchTerm,
-                    date: new Date()
-                })
-            }
-
-        };
+    })
 
 
-        console.log('Requested path is: ', reqPath);
-        console.log('Search term: ', searchTerm);
-        console.log('Offset:', offset);
-        google.resultsPerPage = offset;
-
-        google(searchTerm, function (err, res) {
-            if (err) console.error(err)
-            for (var i = 0; i < res.links.length; ++i) {
-                let link = res.links[i],
-                    result = {
-                        title: link.title,
-                        link: link.href,
-                        description: link.description
-                    }
-                results.push(result);
-            }
-            showResults();
-            // I'll show only first page of results, to enable set nextCounter = 0, outside of google fn
-            // if (nextCounter < 4) {
-            //     nextCounter += 1
-            //     if (res.next) res.next()
-            // }
-        });
-    });
 
     /*
      * Start it up
