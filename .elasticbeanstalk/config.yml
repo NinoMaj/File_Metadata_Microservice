@@ -1,0 +1,14 @@
+branch-defaults:
+  master:
+    environment: File-Metadata-Microservice-dev
+environment-defaults:
+  File-Metadata-Microservice-dev:
+    branch: null
+    repository: null
+global:
+  application_name: File_Metadata_Microservice
+  default_ec2_keyname: AWS Key pair name
+  default_platform: 64bit Amazon Linux 2016.09 v3.3.1 running Node.js
+  default_region: eu-central-1
+  profile: eb-cli
+  sc: git
