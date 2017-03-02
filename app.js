@@ -69,9 +69,6 @@ let hbs;
 
     app.post('/upload', upload.single(), function (req, res, next) {
 
-        // req.file is the `avatar` file 
-        // req.body will hold the text fields, if there were any 
-        console.log(req.file);
         res.render('result', {
             result: req.file.size
         });
